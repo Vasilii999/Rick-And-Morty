@@ -1,4 +1,5 @@
-import 'package:hive/hive.dart';
+
+import 'package:hive_ce/hive.dart';
 import 'package:rick_and_morty/common/theme/app_theme.dart';
 import 'package:rick_and_morty/domain/repositories/theme_repository.dart';
 
