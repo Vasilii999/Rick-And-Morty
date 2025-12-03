@@ -1,3 +1,5 @@
+import 'package:rick_and_morty/common/theme/bloc/theme_cubit.dart';
+import 'package:rick_and_morty/presentation/pages/home_page/widgets/theme_switch.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,7 +11,6 @@ class HomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<HomePage> {
   final _index = ValueNotifier<int>(0);
-  bool _switch = false;
 
   final List<Widget> _pages = [
     const ListCharactersPage(),
@@ -25,27 +26,7 @@ class _MyHomePageState extends State<HomePage> {
           appBar: AppBar(
             title: Text(_index.value == 0 ? 'Персонажи' : 'Избранные'),
             actions: [
-              FlutterSwitch(
-                activeIcon: Assets.svgs.rickNight.svg(),
-                activeColor: Colors.blue,
-                inactiveColor: Colors.blueAccent,
-                inactiveIcon: Assets.svgs.rickLight.svg(),
-                inactiveSwitchBorder: Border.all(width: 1,color: Colors.black),
-                activeSwitchBorder: Border.all(width: 1,color: Colors.black),
-                activeToggleColor: Colors.transparent,
-                inactiveToggleColor: Colors.transparent,
-                toggleSize: 32,
-                width: 70,
-                height: 40,
-                borderRadius: 30.0,
-                showOnOff: false,
-                value: _switch,
-                onToggle: (val) {
-                  setState(() {
-                    _switch = val;
-                  });
-                },
-              ),
+              ThemeSwitch(),
               IconButton(
                 onPressed: () {},
                 icon: Icon(Icons.compare_arrows_outlined),

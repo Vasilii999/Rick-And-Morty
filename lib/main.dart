@@ -1,10 +1,14 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:rick_and_morty/data/datasources/local/theme_hive_repository.dart';
+import 'package:rick_and_morty/domain/repositories/theme_repository.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
 
 import 'presentation/application/application.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
+  await initModules();
 
   runApp(
     ScreenUtilInit(
@@ -19,7 +23,7 @@ Future<void> initModules() async {
 
   await Hive.initFlutter();
   
-  await Hive.openBox('theme');
+  await Hive.openBox<String>('theme');
   await Hive.openBox('favorites');
 
   await initDIs();
@@ -27,5 +31,5 @@ Future<void> initModules() async {
 }
 
 Future<void> initDIs() async {
-  //di.registerLazySingleton<>(() => ,);
+  di.registerLazySingleton<ThemeRepository>(() => ThemeHiveRepository(Hive.box('theme')));
 }
