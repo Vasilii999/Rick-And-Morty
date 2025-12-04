@@ -19,7 +19,7 @@ class CharacterCard extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             borderRadius: defaultCardBorderRadius,
-            color: Colors.blue,
+            color: Theme.of(context).cardTheme.color,
           ),
           width: double.infinity,
           child: Column(

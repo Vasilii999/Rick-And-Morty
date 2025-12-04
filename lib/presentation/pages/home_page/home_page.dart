@@ -39,8 +39,8 @@ class _MyHomePageState extends State<HomePage> {
           body: IndexedStack(index: index, children: _pages),
           bottomNavigationBar: BottomNavigationBar(
             onTap: (index) => _index.value = index,
-            unselectedItemColor: purple,
-            selectedItemColor: green,
+            unselectedItemColor: Colors.grey,
+            selectedItemColor: purple,
             type: BottomNavigationBarType.fixed,
             showSelectedLabels: false,
             showUnselectedLabels: false,

@@ -8,11 +8,11 @@ class ThemeSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlutterSwitch(
       activeIcon: Assets.svgs.rickNight.svg(),
-      activeColor: Colors.blue,
-      inactiveColor: Colors.blueAccent,
+      activeColor: Colors.transparent,
+      inactiveColor: Colors.transparent,
       inactiveIcon: Assets.svgs.rickLight.svg(),
-      inactiveSwitchBorder: Border.all(width: 1, color: Colors.black),
-      activeSwitchBorder: Border.all(width: 1, color: Colors.black),
+      //inactiveSwitchBorder: Border.all(width: 1, color: Colors.black),
+      //activeSwitchBorder: Border.all(width: 1, color: Colors.black),
       activeToggleColor: Colors.transparent,
       inactiveToggleColor: Colors.transparent,
       toggleSize: 32,

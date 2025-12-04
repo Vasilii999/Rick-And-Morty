@@ -10,27 +10,45 @@ final ThemeData lightTheme = ThemeData(
     onSurface: Colors.black,
   ),
   appBarTheme: AppBarTheme(
-    backgroundColor: Colors.blueAccent,
+    backgroundColor: Colors.blue[400],
     foregroundColor: Colors.black,
     centerTitle: true,
   ),
+  textTheme: ThemeData.light().textTheme.apply(
+    bodyColor: Colors.black,
+    displayColor: Colors.black,
+  ),
+  cardTheme: CardThemeData(color: Colors.blue,),
   bottomNavigationBarTheme:
-  BottomNavigationBarThemeData(backgroundColor: Colors.blueAccent),
+  BottomNavigationBarThemeData(backgroundColor: Colors.blue[400]),
+  popupMenuTheme: PopupMenuThemeData(
+    textStyle: TextStyle(color: Colors.black),
+    color: white,
+  ),
 );
 
 final ThemeData darkTheme = ThemeData(
   useMaterial3: true,
-  scaffoldBackgroundColor: Colors.black,
+  scaffoldBackgroundColor: Colors.grey[900],
   colorScheme: ColorScheme.fromSeed(
     seedColor: Colors.deepPurple,
-    brightness: Brightness.light,
+    brightness: Brightness.dark,
     onSurface: Colors.black,
   ),
   appBarTheme: AppBarTheme(
-    backgroundColor: Colors.blueAccent,
-    foregroundColor: Colors.black,
+    backgroundColor: Colors.blue[900],
+    foregroundColor: white,
     centerTitle: true,
   ),
+  textTheme: ThemeData.dark().textTheme.apply(
+    bodyColor: Colors.white,
+    displayColor: Colors.white,
+  ),
+  cardTheme: CardThemeData(color: Colors.blue[800],),
   bottomNavigationBarTheme:
-  BottomNavigationBarThemeData(backgroundColor: Colors.blueAccent),
+  BottomNavigationBarThemeData(backgroundColor: Colors.blue[900]),
+  popupMenuTheme: PopupMenuThemeData(
+    textStyle: TextStyle(color: white),
+    color: Colors.blue[900],
+  ),
 );

@@ -10,31 +10,56 @@ class FilterStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<StatusOption>(
-      icon: Icon(Icons.filter_alt, color: Colors.grey),
+      icon: Icon(
+        Icons.filter_alt,
+        color: Theme.of(context).brightness == Brightness.light
+            ? Colors.grey[700]
+            : Colors.white,
+      ),
       onSelected: onSelected,
       itemBuilder: (BuildContext context) => <PopupMenuEntry<StatusOption>>[
-        const PopupMenuItem<StatusOption>(
+        PopupMenuItem<StatusOption>(
           value: StatusOption.alive,
-          child: Text('Alive'),
+          child: Text(
+            'Alive',
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodyMedium?.color,
+            ),
+          ),
         ),
-        const PopupMenuItem<StatusOption>(
+        PopupMenuItem<StatusOption>(
           value: StatusOption.dead,
-          child: Text('Dead'),
+          child: Text(
+            'Dead',
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodyMedium?.color,
+            ),
+          ),
         ),
-        const PopupMenuItem<StatusOption>(
+        PopupMenuItem<StatusOption>(
           value: StatusOption.unknown,
-          child: Text('Unknown'),
+          child: Text(
+            'Unknown',
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodyMedium?.color,
+            ),
+          ),
         ),
 
-        const PopupMenuDivider(),
+        PopupMenuDivider(),
 
-        const PopupMenuItem<StatusOption>(
+        PopupMenuItem<StatusOption>(
           value: StatusOption.reset,
           child: Row(
             children: [
               Icon(Icons.clear_all, color: Colors.grey, size: 20),
               SizedBox(width: 8),
-              Text('Сбросить'),
+              Text(
+                'Сбросить',
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyMedium?.color,
+                ),
+              ),
             ],
           ),
         ),
