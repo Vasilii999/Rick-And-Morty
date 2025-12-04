@@ -1,4 +1,4 @@
-import 'package:rick_and_morty/presentation/pages/home_page/widgets/filterStatus.dart';
+import 'package:rick_and_morty/presentation/pages/home_page/widgets/filter_status.dart';
 import 'package:rick_and_morty/presentation/pages/home_page/widgets/theme_switch.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
 
