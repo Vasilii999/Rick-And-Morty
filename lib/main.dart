@@ -34,6 +34,7 @@ Future<void> initModules() async {
 
   await Hive.openBox<String>('theme');
   await Hive.openBox<Character>('favorites');
+  await Hive.openBox<Character>('characters_cache');
 
   Hive.registerAdapters();
 
@@ -47,12 +48,15 @@ Future<void> initDIs() async {
   di.registerLazySingleton<CharactersApi>(() => CharactersApi(di<Dio>()));
 
   // repositories
-  di.registerLazySingleton<ThemeRepository>(
-    () => ThemeHiveRepository(Hive.box('theme')),
+  di.registerLazySingleton<CharacterRepository>(
+    () => CharacterHiveRepositoryImpl(
+      di<CharactersApi>(),
+      Hive.box<Character>('characters_cache'),
+    ),
   );
 
-  di.registerLazySingleton<CharacterRepository>(
-    () => CharacterHiveRepositoryImpl(di<CharactersApi>()),
+  di.registerLazySingleton<ThemeRepository>(
+    () => ThemeHiveRepository(Hive.box('theme')),
   );
 
   di.registerLazySingleton<FavoritesRepository>(
