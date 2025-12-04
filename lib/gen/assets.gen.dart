@@ -23,8 +23,12 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/rick_night.svg
   SvgGenImage get rickNight => const SvgGenImage('assets/svgs/rick_night.svg');
 
+  /// File path: assets/svgs/rick_placeholder .svg
+  SvgGenImage get rickPlaceholder =>
+      const SvgGenImage('assets/svgs/rick_placeholder .svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [rickLight, rickNight];
+  List<SvgGenImage> get values => [rickLight, rickNight, rickPlaceholder];
 }
 
 class Assets {

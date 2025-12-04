@@ -1,17 +1,20 @@
 
 import 'package:dio/dio.dart';
+import 'package:rick_and_morty/data/data.dart';
 import 'package:rick_and_morty/data/models/characters_page/characters_page.dart';
 
 class CharactersApi {
   final Dio dio;
   CharactersApi(this.dio);
   
-  Future<CharactersPage> getCharcters(int page) async {
+  Future<List<Character>> fetchListCharcters(int page) async {
     final response = await dio.get('https://rickandmortyapi.com/api/character/?page=$page');
 
-    final data = response.data;
+    final CharactersPage data = CharactersPage.fromJson(response.data);
+
+    final character = data.results.toList();
     
-    return CharactersPage.fromJson(Map<String, dynamic>.from(data));
+    return character;
   }
   
 }

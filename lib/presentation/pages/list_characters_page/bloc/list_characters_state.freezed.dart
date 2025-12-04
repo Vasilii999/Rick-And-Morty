@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ListCharactersState {
 
- EventState get eventState; int get page; List<Character> get character; String? get message;
+ EventState get eventState; int get page; List<Character> get character; String? get message; bool get hasMore;
 /// Create a copy of ListCharactersState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ListCharactersStateCopyWith<ListCharactersState> get copyWith => _$ListCharacte
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ListCharactersState&&(identical(other.eventState, eventState) || other.eventState == eventState)&&(identical(other.page, page) || other.page == page)&&const DeepCollectionEquality().equals(other.character, character)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ListCharactersState&&(identical(other.eventState, eventState) || other.eventState == eventState)&&(identical(other.page, page) || other.page == page)&&const DeepCollectionEquality().equals(other.character, character)&&(identical(other.message, message) || other.message == message)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,eventState,page,const DeepCollectionEquality().hash(character),message);
+int get hashCode => Object.hash(runtimeType,eventState,page,const DeepCollectionEquality().hash(character),message,hasMore);
 
 @override
 String toString() {
-  return 'ListCharactersState(eventState: $eventState, page: $page, character: $character, message: $message)';
+  return 'ListCharactersState(eventState: $eventState, page: $page, character: $character, message: $message, hasMore: $hasMore)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ListCharactersStateCopyWith<$Res>  {
   factory $ListCharactersStateCopyWith(ListCharactersState value, $Res Function(ListCharactersState) _then) = _$ListCharactersStateCopyWithImpl;
 @useResult
 $Res call({
- EventState eventState, int page, List<Character> character, String? message
+ EventState eventState, int page, List<Character> character, String? message, bool hasMore
 });
 
 
@@ -62,13 +62,14 @@ class _$ListCharactersStateCopyWithImpl<$Res>
 
 /// Create a copy of ListCharactersState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? eventState = null,Object? page = null,Object? character = null,Object? message = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? eventState = null,Object? page = null,Object? character = null,Object? message = freezed,Object? hasMore = null,}) {
   return _then(_self.copyWith(
 eventState: null == eventState ? _self.eventState : eventState // ignore: cast_nullable_to_non_nullable
 as EventState,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int,character: null == character ? _self.character : character // ignore: cast_nullable_to_non_nullable
 as List<Character>,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -153,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( EventState eventState,  int page,  List<Character> character,  String? message)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( EventState eventState,  int page,  List<Character> character,  String? message,  bool hasMore)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ListCharactersState() when $default != null:
-return $default(_that.eventState,_that.page,_that.character,_that.message);case _:
+return $default(_that.eventState,_that.page,_that.character,_that.message,_that.hasMore);case _:
   return orElse();
 
 }
@@ -174,10 +175,10 @@ return $default(_that.eventState,_that.page,_that.character,_that.message);case 
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( EventState eventState,  int page,  List<Character> character,  String? message)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( EventState eventState,  int page,  List<Character> character,  String? message,  bool hasMore)  $default,) {final _that = this;
 switch (_that) {
 case _ListCharactersState():
-return $default(_that.eventState,_that.page,_that.character,_that.message);case _:
+return $default(_that.eventState,_that.page,_that.character,_that.message,_that.hasMore);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +195,10 @@ return $default(_that.eventState,_that.page,_that.character,_that.message);case 
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( EventState eventState,  int page,  List<Character> character,  String? message)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( EventState eventState,  int page,  List<Character> character,  String? message,  bool hasMore)?  $default,) {final _that = this;
 switch (_that) {
 case _ListCharactersState() when $default != null:
-return $default(_that.eventState,_that.page,_that.character,_that.message);case _:
+return $default(_that.eventState,_that.page,_that.character,_that.message,_that.hasMore);case _:
   return null;
 
 }
@@ -209,7 +210,7 @@ return $default(_that.eventState,_that.page,_that.character,_that.message);case 
 
 
 class _ListCharactersState implements ListCharactersState {
-  const _ListCharactersState({this.eventState = EventState.initial, this.page = 1, final  List<Character> character = const [], this.message}): _character = character;
+  const _ListCharactersState({this.eventState = EventState.initial, this.page = 1, final  List<Character> character = const [], this.message, this.hasMore = true}): _character = character;
   
 
 @override@JsonKey() final  EventState eventState;
@@ -222,6 +223,7 @@ class _ListCharactersState implements ListCharactersState {
 }
 
 @override final  String? message;
+@override@JsonKey() final  bool hasMore;
 
 /// Create a copy of ListCharactersState
 /// with the given fields replaced by the non-null parameter values.
@@ -233,16 +235,16 @@ _$ListCharactersStateCopyWith<_ListCharactersState> get copyWith => __$ListChara
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ListCharactersState&&(identical(other.eventState, eventState) || other.eventState == eventState)&&(identical(other.page, page) || other.page == page)&&const DeepCollectionEquality().equals(other._character, _character)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ListCharactersState&&(identical(other.eventState, eventState) || other.eventState == eventState)&&(identical(other.page, page) || other.page == page)&&const DeepCollectionEquality().equals(other._character, _character)&&(identical(other.message, message) || other.message == message)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,eventState,page,const DeepCollectionEquality().hash(_character),message);
+int get hashCode => Object.hash(runtimeType,eventState,page,const DeepCollectionEquality().hash(_character),message,hasMore);
 
 @override
 String toString() {
-  return 'ListCharactersState(eventState: $eventState, page: $page, character: $character, message: $message)';
+  return 'ListCharactersState(eventState: $eventState, page: $page, character: $character, message: $message, hasMore: $hasMore)';
 }
 
 
@@ -253,7 +255,7 @@ abstract mixin class _$ListCharactersStateCopyWith<$Res> implements $ListCharact
   factory _$ListCharactersStateCopyWith(_ListCharactersState value, $Res Function(_ListCharactersState) _then) = __$ListCharactersStateCopyWithImpl;
 @override @useResult
 $Res call({
- EventState eventState, int page, List<Character> character, String? message
+ EventState eventState, int page, List<Character> character, String? message, bool hasMore
 });
 
 
@@ -270,13 +272,14 @@ class __$ListCharactersStateCopyWithImpl<$Res>
 
 /// Create a copy of ListCharactersState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? eventState = null,Object? page = null,Object? character = null,Object? message = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? eventState = null,Object? page = null,Object? character = null,Object? message = freezed,Object? hasMore = null,}) {
   return _then(_ListCharactersState(
 eventState: null == eventState ? _self.eventState : eventState // ignore: cast_nullable_to_non_nullable
 as EventState,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int,character: null == character ? _self._character : character // ignore: cast_nullable_to_non_nullable
 as List<Character>,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

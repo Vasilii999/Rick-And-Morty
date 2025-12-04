@@ -12,5 +12,6 @@ abstract class ListCharactersState with _$ListCharactersState {
     @Default(1) int page,
     @Default([]) List<Character> character,
     String? message,
+    @Default(true)bool hasMore,
 }) = _ListCharactersState;
 }

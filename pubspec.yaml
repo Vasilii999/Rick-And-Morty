@@ -37,6 +37,7 @@ dev_dependencies:
   freezed: ^3.2.3
   flutter_native_splash: ^2.4.4
   flutter_gen_runner: ^5.8.0
+  cached_network_image: ^3.4.1
 
   flutter_lints: ^6.0.0
 

@@ -1,7 +1,9 @@
 import 'package:rick_and_morty/common/theme/bloc/theme_cubit.dart';
 import 'package:rick_and_morty/common/theme/bloc/theme_state.dart';
 import 'package:rick_and_morty/domain/repositories/character_repository.dart';
+import 'package:rick_and_morty/domain/repositories/favorites_repository.dart';
 import 'package:rick_and_morty/domain/repositories/theme_repository.dart';
+import 'package:rick_and_morty/presentation/pages/favorites_page/bloc/bloc.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
 import 'package:rick_and_morty/presentation/pages/list_characters_page/bloc/bloc.dart';
 
@@ -18,6 +20,9 @@ class Application extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ThemeCubit(di.get<ThemeRepository>()),
+        ),
+        BlocProvider(
+          create: (context) => FavoritesCubit(di.get<FavoritesRepository>()),
         ),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(

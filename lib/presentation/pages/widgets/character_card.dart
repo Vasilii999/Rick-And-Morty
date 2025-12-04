@@ -1,11 +1,15 @@
 import 'package:rick_and_morty/data/models/character/character.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:rick_and_morty/presentation/pages/favorites_page/bloc/bloc.dart';
 
 import '/utils/presentation_exports.dart';
 
 class CharacterCard extends StatelessWidget {
   final Character character;
+  final bool isFavorite;
 
-  const CharacterCard({super.key, required this.character});
+  const CharacterCard({super.key, required this.character, required this.isFavorite});
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +36,11 @@ class CharacterCard extends StatelessWidget {
                           width: 150.w,
                           child: ClipRRect(
                             borderRadius: defaultCardBorderRadius,
-                            child: Image.network(
-                              character.image,
+                            child: CachedNetworkImage(
+                              imageUrl: character.image,
                               fit: BoxFit.cover,
-                              //TODO: cache image or icon
-                              errorBuilder: (context, error, stackTrace) =>
-                                  Center(child: Text('Не удалось загрузить')),
+                              placeholder: (context, url) => Assets.svgs.rickPlaceholder.svg(),
+                              errorWidget: (context, url, error) => Assets.svgs.rickPlaceholder.svg(),
                             ),
                           ),
                         ),
@@ -109,8 +112,10 @@ class CharacterCard extends StatelessWidget {
           top: -10,
           right: -10,
           child: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.star, color: Colors.white),
+            icon: Icon(Icons.star, color: isFavorite ? Colors.yellow : white),
+            onPressed: () {
+              context.read<FavoritesCubit>().toggleFavorite(character);
+            },
           ),
         ),
       ],

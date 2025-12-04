@@ -7,16 +7,15 @@ class FavoritesRepositoryImpl implements FavoritesRepository{
   FavoritesRepositoryImpl(this.hiveData);
 
   @override
-  Future<List<Character>> read() => hiveData.read();
-
-
-  @override
-  Future<void> save(Character char) => hiveData.save(char);
+  Future<List<Character>> readFavorite() => hiveData.read();
 
   @override
-  Future<void> delete(int id) async => hiveData.delete(id);
+  Future<void> addFavorite(Character char) => hiveData.save(char);
 
   @override
-  Future<bool> exists(int id) async => hiveData.exists(id);
+  Future<void> deleteFavorite(int id) async => hiveData.delete(id);
+
+  @override
+  Future<bool> existsFavorite(int id) async => hiveData.exists(id);
 
 }

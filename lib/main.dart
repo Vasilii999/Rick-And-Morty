@@ -38,7 +38,7 @@ Future<void> initModules() async {
 
   await Hive.openBox<String>('theme');
   await Hive.openBox<Character>('favorites');
-  await Hive.openBox('characters_cache');
+  await Hive.openBox<Character>('characters_cache');
 
   await initDIs();
 }
@@ -54,7 +54,7 @@ Future<void> initDIs() async {
   di.registerLazySingleton<CharacterRepository>(
         () => CharacterHiveRepositoryImpl(
       di<CharactersApi>(),
-      Hive.box('characters_cache'),
+      Hive.box<Character>('characters_cache'),
     ),
   );
 

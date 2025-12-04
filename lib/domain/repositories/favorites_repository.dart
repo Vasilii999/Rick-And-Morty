@@ -1,11 +1,11 @@
 import 'package:rick_and_morty/data/models/character/character.dart';
 
 abstract interface class FavoritesRepository {
-  Future<void> save(Character char);
+  Future<void> addFavorite(Character char);
 
-  Future<List<Character>> read();
+  Future<List<Character>> readFavorite();
 
-  Future<void> delete(int id);
+  Future<void> deleteFavorite(int id);
 
-  Future<bool> exists(int id);
+  Future<bool> existsFavorite(int id);
 }

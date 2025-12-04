@@ -1,6 +1,7 @@
+import 'package:rick_and_morty/presentation/pages/favorites_page/bloc/bloc.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
 import 'bloc/bloc.dart';
-import 'widgets/character_card.dart';
+import '../widgets/character_card.dart';
 
 class ListCharactersPage extends StatefulWidget {
   const ListCharactersPage({super.key});
@@ -47,7 +48,7 @@ class _ListCharactersPageState extends State<ListCharactersPage> {
               state.character.isEmpty) {
             return Center(child: CircularProgressIndicator());
           }
-          if (state.eventState == EventState.error && state.character.isEmpty) {
+          if (state.character.isEmpty) {
             return Center(child: Text(state.message.toString()));
           }
           final items = state.character;
@@ -59,18 +60,33 @@ class _ListCharactersPageState extends State<ListCharactersPage> {
                   padding: listPadding,
                   separatorBuilder: (context, index) => spacingV16,
                   itemBuilder: (context, index) {
-                    if (index >= state.character.length) {
+                    if (index == state.character.length) {
                       return Padding(
                         padding: EdgeInsets.all(16),
                         child: Center(child: CircularProgressIndicator()),
                       );
                     }
                     final item = items[index];
-                    return CharacterCard(character: item);
+                    final isFavorite = context
+                        .read<FavoritesCubit>()
+                        .isFavorite(item.id);
+                    return FutureBuilder<bool>(
+                      future: isFavorite,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CharacterCard(
+                            character: item,
+                            isFavorite: false,
+                          );
+                        }
+                        final isFavorite = snapshot.data ?? false;
+
+                        return CharacterCard(character: item, isFavorite: isFavorite,);
+                      },
+                    );
                   },
-                  itemCount:
-                      items.length +
-                      (state.eventState == EventState.loading ? 1 : 0),
+                  itemCount: items.length + (state.hasMore ? 1 : 0),
                 ),
               ),
             ],
