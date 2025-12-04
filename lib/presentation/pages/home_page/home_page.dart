@@ -1,3 +1,4 @@
+import 'package:rick_and_morty/presentation/pages/home_page/widgets/filterStatus.dart';
 import 'package:rick_and_morty/presentation/pages/home_page/widgets/theme_switch.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
 
@@ -26,10 +27,7 @@ class _MyHomePageState extends State<HomePage> {
             title: Text(_index.value == 0 ? 'Персонажи' : 'Избранные'),
             actions: [
               ThemeSwitch(),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.compare_arrows_outlined),
-              ),
+              FilterStatus(onSelected: (value) => ()),
             ],
           ),
           body: IndexedStack(index: index, children: _pages),
@@ -42,14 +40,8 @@ class _MyHomePageState extends State<HomePage> {
             showUnselectedLabels: false,
             currentIndex: index,
             items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Персонажи',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.star),
-                label: 'Избранное',
-              ),
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+              BottomNavigationBarItem(icon: Icon(Icons.star), label: ''),
             ],
           ),
         );
@@ -57,3 +49,5 @@ class _MyHomePageState extends State<HomePage> {
     );
   }
 }
+
+
