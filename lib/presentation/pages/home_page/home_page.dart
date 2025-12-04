@@ -1,4 +1,3 @@
-import 'package:rick_and_morty/common/theme/bloc/theme_cubit.dart';
 import 'package:rick_and_morty/presentation/pages/home_page/widgets/theme_switch.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
 
