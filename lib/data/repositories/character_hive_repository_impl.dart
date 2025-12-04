@@ -11,10 +11,14 @@ class CharacterHiveRepositoryImpl implements CharacterRepository {
 
 
   @override
-  Future<List<Character>> getCharacter(int page) async {
+  Future<List<Character>> getCharacter({
+    int page = 1,
+    String? status,
+}) async {
     var charList = <Character>[];
     try {
-      charList = await api.fetchListCharcters(page);
+      charList = await api.fetchListCharcters(page: page,status: status);
+
       final charMap = {for (var e in charList) e.id: e};
       await charBox.putAll(charMap);
     } catch (e) {

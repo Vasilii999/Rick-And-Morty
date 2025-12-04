@@ -2,6 +2,8 @@ import 'package:rick_and_morty/presentation/pages/home_page/widgets/filterStatus
 import 'package:rick_and_morty/presentation/pages/home_page/widgets/theme_switch.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
 
+import '../list_characters_page/bloc/list_characters_cubit.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -27,7 +29,11 @@ class _MyHomePageState extends State<HomePage> {
             title: Text(_index.value == 0 ? 'Персонажи' : 'Избранные'),
             actions: [
               ThemeSwitch(),
-              FilterStatus(onSelected: (value) => ()),
+              FilterStatus(
+                currentStatus: context.read<ListCharactersCubit>().currentStatus,
+                  onSelected: (status) {
+                  context.read<ListCharactersCubit>().filterByStatus(status);
+                  }),
             ],
           ),
           body: IndexedStack(index: index, children: _pages),

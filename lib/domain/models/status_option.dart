@@ -1,0 +1,1 @@
+enum StatusOption { alive, dead, unknown, reset }

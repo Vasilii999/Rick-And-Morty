@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-
-enum StatusOption { alive, dead, unknown, reset }
+import 'package:rick_and_morty/domain/models/status_option.dart';
 
 class FilterStatus extends StatelessWidget {
   final ValueChanged<StatusOption> onSelected;
   final String? currentStatus;
 
-  const FilterStatus({
-    super.key,
-    required this.onSelected,
-    this.currentStatus,
-  });
+  const FilterStatus({super.key, required this.onSelected, this.currentStatus});
 
   @override
   Widget build(BuildContext context) {
