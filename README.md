@@ -17,7 +17,6 @@
 - **[hive_ce](https://pub.dev/packages/hive_ce)** и **hive_ce_flutter** — легковесная база данных для хранения локальных данных.
 - **[flutter_svg](https://pub.dev/packages/flutter_svg)** — работа с SVG графикой.
 - **[cached_network_image](https://pub.dev/packages/cached_network_image)** — кэширование изображений из сети.
-- **[flutter_native_splash](https://pub.dev/packages/flutter_native_splash)** — настройка нативного сплэш-экрана.
 - **[flutter_gen](https://pub.dev/packages/flutter_gen_runner)** — генерация ресурсов проекта.
 
 ---
