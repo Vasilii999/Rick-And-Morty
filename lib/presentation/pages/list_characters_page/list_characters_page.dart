@@ -1,4 +1,3 @@
-import 'package:rick_and_morty/presentation/pages/favorites_page/bloc/bloc.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
 import 'bloc/bloc.dart';
 import '../widgets/character_card.dart';
@@ -67,24 +66,7 @@ class _ListCharactersPageState extends State<ListCharactersPage> {
                       );
                     }
                     final item = items[index];
-                    final isFavorite = context
-                        .read<FavoritesCubit>()
-                        .isFavorite(item.id);
-                    return FutureBuilder<bool>(
-                      future: isFavorite,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return CharacterCard(
-                            character: item,
-                            isFavorite: false,
-                          );
-                        }
-                        final isFavorite = snapshot.data ?? false;
-
-                        return CharacterCard(character: item, isFavorite: isFavorite,);
-                      },
-                    );
+                    return CharacterCard(character: item);
                   },
                   itemCount: items.length + (state.hasMore ? 1 : 0),
                 ),

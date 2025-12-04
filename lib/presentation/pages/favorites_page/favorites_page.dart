@@ -38,7 +38,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         if(favorites.isEmpty) {
                           return const Center(child: Text('Избранных нет'),);
                         }
-                        return CharacterCard(character: favorites[index],isFavorite: true,);
+                        return CharacterCard(character: favorites[index]);
                       },
                     ),
                   ),

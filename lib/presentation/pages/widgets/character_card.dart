@@ -6,10 +6,11 @@ import '/utils/presentation_exports.dart';
 
 class CharacterCard extends StatelessWidget {
   final Character character;
-  final bool isFavorite;
 
-  const CharacterCard({super.key, required this.character, required this.isFavorite});
-
+  const CharacterCard({
+    super.key,
+    required this.character,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +40,10 @@ class CharacterCard extends StatelessWidget {
                             child: CachedNetworkImage(
                               imageUrl: character.image,
                               fit: BoxFit.cover,
-                              placeholder: (context, url) => Assets.svgs.rickPlaceholder.svg(),
-                              errorWidget: (context, url, error) => Assets.svgs.rickPlaceholder.svg(),
+                              placeholder: (context, url) =>
+                                  Assets.svgs.rickPlaceholder.svg(),
+                              errorWidget: (context, url, error) =>
+                                  Assets.svgs.rickPlaceholder.svg(),
                             ),
                           ),
                         ),
@@ -87,14 +90,12 @@ class CharacterCard extends StatelessWidget {
                           ),
                           Text(
                             'Origin: ${character.origin.name}',
-                            // получаем только
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(fontSize: 16),
                           ),
                           Text(
                             'Location: ${character.location.name}',
-                            // получаем только
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(fontSize: 16),
@@ -111,10 +112,18 @@ class CharacterCard extends StatelessWidget {
         Positioned(
           top: -10,
           right: -10,
-          child: IconButton(
-            icon: Icon(Icons.star, color: isFavorite ? Colors.yellow : white),
-            onPressed: () {
-              context.read<FavoritesCubit>().toggleFavorite(character);
+          child: BlocBuilder<FavoritesCubit, FavoritesState>(
+            builder: (context, state) {
+              final isFavorite = context.read<FavoritesCubit>().isFavoriteSync(character.id);
+              return IconButton(
+                icon: Icon(
+                  Icons.star,
+                  color: isFavorite ? Colors.yellow : white,
+                ),
+                onPressed: () {
+                  context.read<FavoritesCubit>().toggleFavorite(character);
+                },
+              );
             },
           ),
         ),

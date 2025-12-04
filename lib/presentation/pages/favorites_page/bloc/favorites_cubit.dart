@@ -5,6 +5,7 @@ import 'package:rick_and_morty/utils/presentation_exports.dart';
 
 class FavoritesCubit extends Cubit<FavoritesState> {
   final FavoritesRepository repository;
+  final Set<int> _favoriteIds = {};
 
   FavoritesCubit(this.repository) : super(FavoritesState.initial());
 
@@ -13,11 +14,25 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     emit(const FavoritesState.loading());
     try {
       final favorite = await repository.readFavorite();
+      _favoriteIds..clear()..addAll(favorite.map((e) => e.id));
       emit(FavoritesState.data(favorites: favorite));
     } catch (e) {
       emit(FavoritesState.error(message: e.toString()));
     }
   }
+
+  Future<void> toggleFavorite(Character character) async {
+      if(_favoriteIds.contains(character.id)) {
+        _favoriteIds.remove(character.id);
+        repository.deleteFavorite(character.id);
+      } else {
+        _favoriteIds.add(character.id);
+        repository.addFavorite(character);
+      }
+      await loadFavorites();
+  }
+
+  bool isFavoriteSync(int id) => _favoriteIds.contains(id);
 
   Future<void> addFavorite(Character character) async{
     if(state == const FavoritesState.loading()) return;
@@ -39,27 +54,5 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     }
   }
 
-  Future<bool> isFavorite(int id) async {
-    try {
-      return await repository.existsFavorite(id);
-    } catch (_) {
-      return false;
-    }
-  }
-
-  Future<void> toggleFavorite(Character character) async {
-    try {
-      final exists = await repository.existsFavorite(character.id);
-      if(exists) {
-        await repository.deleteFavorite(character.id);
-      } else {
-        await repository.addFavorite(character);
-      }
-      await loadFavorites();
-    } catch (e) {
-      emit(FavoritesState.error(message: e.toString()));
-    }
-
-  }
 
 }
