@@ -32,11 +32,13 @@ void main() async {
 Future<void> initModules() async {
   await Hive.initFlutter();
 
-  await Hive.openBox<String>('theme');
-  await Hive.openBox<Character>('favorites');
-  await Hive.openBox<Character>('characters_cache');
+  // Hive.deleteBoxFromDisk('characters_cache_list');
 
   Hive.registerAdapters();
+
+  await Hive.openBox<String>('theme');
+  await Hive.openBox<Character>('favorites');
+  await Hive.openBox('characters_cache');
 
   await initDIs();
 }
@@ -47,20 +49,21 @@ Future<void> initDIs() async {
   //API
   di.registerLazySingleton<CharactersApi>(() => CharactersApi(di<Dio>()));
 
+
   // repositories
   di.registerLazySingleton<CharacterRepository>(
-    () => CharacterHiveRepositoryImpl(
+        () => CharacterHiveRepositoryImpl(
       di<CharactersApi>(),
-      Hive.box<Character>('characters_cache'),
+      Hive.box('characters_cache'),
     ),
   );
 
   di.registerLazySingleton<ThemeRepository>(
-    () => ThemeHiveRepository(Hive.box('theme')),
+        () => ThemeHiveRepository(Hive.box('theme')),
   );
 
   di.registerLazySingleton<FavoritesRepository>(
-    () => FavoritesRepositoryImpl(
+        () => FavoritesRepositoryImpl(
       FavoritesHiveDataSource(Hive.box<Character>('favorites')),
     ),
   );

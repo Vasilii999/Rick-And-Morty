@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:rick_and_morty/domain/repositories/character_repository.dart';
 
 import 'bloc.dart';
@@ -7,7 +8,7 @@ class ListCharactersCubit extends Cubit<ListCharactersState> {
   final CharacterRepository repository;
 
   ListCharactersCubit({ListCharactersState? state, required this.repository})
-    : super(state ?? const ListCharactersState());
+      : super(state ?? const ListCharactersState());
 
   Future<void> loadNextPage() async {
     if (state.eventState == EventState.loading) return;
@@ -23,7 +24,10 @@ class ListCharactersCubit extends Cubit<ListCharactersState> {
           message: null,
         ),
       );
-    } catch (e) {
+    } on DioException catch (e) {
+      emit(state.copyWith(eventState: EventState.error, message: 'Проверьте интернет соединение'));
+    }
+    catch (e) {
       emit(state.copyWith(eventState: EventState.error, message: e.toString()));
     }
   }

@@ -35,6 +35,9 @@ class CharacterCard extends StatelessWidget {
                             child: Image.network(
                               character.image,
                               fit: BoxFit.cover,
+                              //TODO: cache image or icon
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Center(child: Text('Не удалось загрузить')),
                             ),
                           ),
                         ),

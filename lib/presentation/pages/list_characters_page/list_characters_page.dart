@@ -10,7 +10,6 @@ class ListCharactersPage extends StatefulWidget {
 }
 
 class _ListCharactersPageState extends State<ListCharactersPage> {
-
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -30,38 +29,53 @@ class _ListCharactersPageState extends State<ListCharactersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<ListCharactersCubit, ListCharactersState>(
-        builder: (context, state) {
-          if(state.eventState == EventState.loading && state.character.isEmpty){
-            return Center(child: CircularProgressIndicator());
-          }
-          if(state.eventState == EventState.error){
-            return Center(child: Text(state.message.toString()),);
-          }
-            final items = state.character;
-            return Column(
-              children: [
-                Expanded(
-                  child: ListView.separated(
-                    controller: _scrollController,
-                    padding: listPadding,
-                    separatorBuilder: (context, index) => spacingV16,
-                    itemBuilder: (context, index) {
-                      if(index >= state.character.length){
-                       return Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Center(child: CircularProgressIndicator()),
-                        );
-                      }
-                      final item = items[index];
-                      return CharacterCard(character: item);
-                    },
-                    itemCount: items.length + (state.eventState == EventState.loading ? 1 : 0),
-                  ),
+      body: BlocConsumer<ListCharactersCubit, ListCharactersState>(
+        listener: (context, state) {
+          if (state.eventState == EventState.error &&
+              state.character.isNotEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  state.message ?? 'Во время загрузки произошла ошибка',
                 ),
-              ],
+              ),
             );
           }
+        },
+        builder: (context, state) {
+          if (state.eventState == EventState.loading &&
+              state.character.isEmpty) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (state.eventState == EventState.error && state.character.isEmpty) {
+            return Center(child: Text(state.message.toString()));
+          }
+          final items = state.character;
+          return Column(
+            children: [
+              Expanded(
+                child: ListView.separated(
+                  controller: _scrollController,
+                  padding: listPadding,
+                  separatorBuilder: (context, index) => spacingV16,
+                  itemBuilder: (context, index) {
+                    if (index >= state.character.length) {
+                      return Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    }
+                    final item = items[index];
+                    return CharacterCard(character: item);
+                  },
+                  itemCount:
+                      items.length +
+                      (state.eventState == EventState.loading ? 1 : 0),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
