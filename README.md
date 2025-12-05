@@ -37,9 +37,9 @@
 ---
 
 ## Установка и сборка
-
+Flutter 3.38.1 Dart 3.10.0
 1. Клонируй репозиторий:
-git clone https://github.com/Vasilii999/Github-users-app
+git clone https://github.com/Vasilii999/Rick-And-Morty
 cd rick_and_morty
 2. Установи зависимости:
    flutter pub get
