@@ -2,6 +2,7 @@ import 'package:rick_and_morty/presentation/pages/home_page/widgets/filter_statu
 import 'package:rick_and_morty/presentation/pages/home_page/widgets/theme_switch.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
 
+import '../favorites_page/bloc/bloc.dart';
 import '../list_characters_page/bloc/list_characters_cubit.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,6 +34,7 @@ class _MyHomePageState extends State<HomePage> {
                 currentStatus: context.read<ListCharactersCubit>().currentStatus,
                   onSelected: (status) {
                   context.read<ListCharactersCubit>().filterByStatus(status);
+                  context.read<FavoritesCubit>().filterByStatus(status);
                   }),
             ],
           ),

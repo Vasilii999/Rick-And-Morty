@@ -48,5 +48,9 @@ cd rick_and_morty
 <img src="assets/screenshots/Screenshot7.png" width="300" />
 Пагинация
 <img src="assets/screenshots/Screenshot8.png" width="300" />
+Сортировка по статусу в избранном
+<img src="assets/screenshots/Screenshot9.png" width="300" />
+Сортировка по статусу Unknown в избранном
+<img src="assets/screenshots/Screenshot10.png" width="300" />
 
 

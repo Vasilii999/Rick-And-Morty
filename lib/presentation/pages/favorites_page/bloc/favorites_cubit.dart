@@ -1,4 +1,5 @@
 import 'package:rick_and_morty/data/models/character/character.dart';
+import 'package:rick_and_morty/domain/models/status_option.dart';
 import 'package:rick_and_morty/domain/repositories/favorites_repository.dart';
 import 'package:rick_and_morty/presentation/pages/favorites_page/bloc/favorites_state.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
@@ -6,19 +7,41 @@ import 'package:rick_and_morty/utils/presentation_exports.dart';
 class FavoritesCubit extends Cubit<FavoritesState> {
   final FavoritesRepository repository;
   final Set<int> _favoriteIds = {};
+  String? currentStatus;
 
   FavoritesCubit(this.repository) : super(FavoritesState.initial());
 
   Future<void> loadFavorites() async {
     if(state == const FavoritesState.loading()) return;
     emit(const FavoritesState.loading());
+
     try {
       final favorite = await repository.readFavorite();
       _favoriteIds..clear()..addAll(favorite.map((e) => e.id));
-      emit(FavoritesState.data(favorites: favorite));
+      final filtered = _applyFilter(favorite);
+
+      emit(FavoritesState.data(favorites: filtered));
     } catch (e) {
       emit(FavoritesState.error(message: e.toString()));
     }
+  }
+
+  List<Character> _applyFilter(List<Character> list) {
+    if (currentStatus == null) return list;
+
+    return list.where((c) =>
+    c.status.toLowerCase() == currentStatus!.toLowerCase()
+    ).toList();
+  }
+
+  Future<void> filterByStatus(StatusOption status) async {
+    if (status == StatusOption.reset) {
+      currentStatus = null;
+    } else {
+      currentStatus = status.name;
+    }
+
+    await loadFavorites(); // просто перегружаем с новым фильтром
   }
 
   Future<void> toggleFavorite(Character character) async {
