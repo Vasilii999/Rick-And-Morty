@@ -17,7 +17,7 @@
 - **[hive_ce](https://pub.dev/packages/hive_ce)** и **hive_ce_flutter** — легковесная база данных для хранения локальных данных.
 - **[flutter_svg](https://pub.dev/packages/flutter_svg)** — работа с SVG графикой.
 - **[cached_network_image](https://pub.dev/packages/cached_network_image)** — кэширование изображений из сети.
-- **[flutter_gen](https://pub.dev/packages/flutter_gen_runner)** — генерация ресурсов проекта.
+  - **[flutter_gen](https://pub.dev/packages/flutter_gen_runner)** — генерация ресурсов проекта.    
 
 ---
 
@@ -28,18 +28,25 @@ git clone https://github.com/Vasilii999/Github-users-app
 cd rick_and_morty
 2. Установи зависимости:
    flutter pub get
-3. Сгенерируй код (если используются json_serializable или freezed):
+3. Сгенерируй код
    flutter pub run build_runner build --delete-conflicting-outputs
 4. Запусти приложение на эмуляторе или подключенном устройстве:
    flutter run
 
-<img src="assets/screenshots/Screenshot1.png" width="300" />
+
+Светлая тема
 <img src="assets/screenshots/Screenshot2.png" width="300" />
+Тёмная тема
 <img src="assets/screenshots/Screenshot3.png" width="300" />
+Статусы для сортировки
 <img src="assets/screenshots/Screenshot4.png" width="300" />
+Сортировка по статусу Dead
 <img src="assets/screenshots/Screenshot5.png" width="300" />
+Добавление в избранное на главной
 <img src="assets/screenshots/Screenshot6.png" width="300" />
+Избранное
 <img src="assets/screenshots/Screenshot7.png" width="300" />
+Пагинация
 <img src="assets/screenshots/Screenshot8.png" width="300" />
 
 
