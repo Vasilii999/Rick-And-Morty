@@ -33,21 +33,20 @@ cd rick_and_morty
 4. Запусти приложение на эмуляторе или подключенном устройстве:
    flutter run
 
+Светлая тема
 
 <img src="assets/screenshots/Screenshot2.png" width="300" />
-Светлая тема
-<img src="assets/screenshots/Screenshot3.png" width="300" />
 Тёмная тема
+<img src="assets/screenshots/Screenshot3.png" width="300" />
+Статусы для сортировки
 <img src="assets/screenshots/Screenshot4.png" width="300" />
-Светлая тема
-<img src="assets/screenshots/Screenshot5.png" width="300" />
 Сортировка по статусу Dead
-<img src="assets/screenshots/Screenshot6.png" width="300" />
+<img src="assets/screenshots/Screenshot5.png" width="300" />
 Добавление в избранное на главной
-<img src="assets/screenshots/Screenshot7.png" width="300" />
+<img src="assets/screenshots/Screenshot6.png" width="300" />
 Избранное
-<img src="assets/screenshots/Screenshot8.png" width="300" />
+<img src="assets/screenshots/Screenshot7.png" width="300" />
 Пагинация
-
+<img src="assets/screenshots/Screenshot8.png" width="300" />
 
 
