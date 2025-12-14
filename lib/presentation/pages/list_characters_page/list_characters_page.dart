@@ -1,5 +1,7 @@
+import 'package:rick_and_morty/presentation/pages/list_characters_page/bloc/event_state.dart';
+import 'package:rick_and_morty/presentation/pages/list_characters_page/bloc/list_characters_cubit.dart';
+import 'package:rick_and_morty/presentation/pages/list_characters_page/bloc/list_characters_state.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
-import 'bloc/bloc.dart';
 import '../widgets/character_card.dart';
 
 class ListCharactersPage extends StatefulWidget {

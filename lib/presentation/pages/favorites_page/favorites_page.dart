@@ -1,7 +1,7 @@
-import 'package:rick_and_morty/presentation/pages/widgets/character_card.dart';
+import 'package:rick_and_morty/presentation/pages/favorites_page/bloc/favorites_cubit.dart';
+import 'package:rick_and_morty/presentation/pages/favorites_page/bloc/favorites_state.dart';
+import 'package:rick_and_morty/presentation/pages/widgets/widgets.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
-import 'bloc/bloc.dart';
-
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});
@@ -11,7 +11,6 @@ class FavoritesPage extends StatefulWidget {
 }
 
 class _FavoritesPageState extends State<FavoritesPage> {
-
   @override
   void initState() {
     super.initState();
@@ -23,30 +22,29 @@ class _FavoritesPageState extends State<FavoritesPage> {
     return Scaffold(
       body: BlocBuilder<FavoritesCubit, FavoritesState>(
         builder: (context, state) => state.maybeWhen(
-            loading: () =>  const Center(child: CircularProgressIndicator(),),
-            error: (message) => Center(child: Text(message),),
-            orElse:() =>  SizedBox.shrink(),
-            data: (favorites) {
-              return Column(
-                children: [
-                  Expanded(
-                    child: ListView.separated(
-                      padding: listPadding,
-                      separatorBuilder: (context, index) => spacingV16,
-                      itemCount: favorites.length,
-                      itemBuilder: (context, index) {
-                        if(favorites.isEmpty) {
-                          return const Center(child: Text('Избранных нет'),);
-                        }
-                        return CharacterCard(character: favorites[index]);
-                      },
-                    ),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (message) => Center(child: Text(message)),
+          orElse: () => SizedBox.shrink(),
+          data: (favorites) {
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.separated(
+                    padding: listPadding,
+                    separatorBuilder: (context, index) => spacingV16,
+                    itemCount: favorites.length,
+                    itemBuilder: (context, index) {
+                      if (favorites.isEmpty) {
+                        return const Center(child: Text('Избранных нет'));
+                      }
+                      return CharacterCard(character: favorites[index]);
+                    },
                   ),
-                ],
-              );
-            },
-
-          ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

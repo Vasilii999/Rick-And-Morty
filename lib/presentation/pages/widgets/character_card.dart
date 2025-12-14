@@ -1,7 +1,5 @@
-import 'package:rick_and_morty/data/models/character/character.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:rick_and_morty/presentation/pages/favorites_page/bloc/bloc.dart';
-
+import 'package:rick_and_morty/presentation/pages/favorites_page/bloc/favorites_cubit.dart';
+import 'package:rick_and_morty/presentation/pages/favorites_page/bloc/favorites_state.dart';
 import '/utils/presentation_exports.dart';
 
 class CharacterCard extends StatelessWidget {
@@ -114,7 +112,7 @@ class CharacterCard extends StatelessWidget {
           right: -10,
           child: BlocBuilder<FavoritesCubit, FavoritesState>(
             builder: (context, state) {
-              final isFavorite = context.read<FavoritesCubit>().isFavoriteSync(character.id);
+              final isFavorite = context.read<FavoritesCubit>().isFavorite(character.id);
               return IconButton(
                 icon: Icon(
                   Icons.star,

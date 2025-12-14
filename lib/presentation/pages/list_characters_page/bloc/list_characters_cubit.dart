@@ -1,12 +1,9 @@
-import 'package:rick_and_morty/domain/models/status_option.dart';
-import 'package:rick_and_morty/domain/repositories/character_repository.dart';
-
-import 'bloc.dart';
+import 'package:rick_and_morty/presentation/pages/list_characters_page/bloc/event_state.dart';
+import 'package:rick_and_morty/presentation/pages/list_characters_page/bloc/list_characters_state.dart';
 import '/utils/presentation_exports.dart';
 
 class ListCharactersCubit extends Cubit<ListCharactersState> {
   final CharacterRepository repository;
-
   String? currentStatus;
 
   ListCharactersCubit({ListCharactersState? state, required this.repository})
