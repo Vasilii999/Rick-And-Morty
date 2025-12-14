@@ -1,5 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart';
+import 'package:rick_and_morty/utils/presentation_exports.dart';
 
 final di = GetIt.instance;
 

@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
 import 'gen/hive_registrar.g.dart';
 import 'presentation/application/application.dart';
@@ -20,8 +18,6 @@ void main() async {
 
 Future<void> initModules() async {
   await Hive.initFlutter();
-
-  // Hive.deleteBoxFromDisk('characters_cache_list');
 
   Hive.registerAdapters();
 
