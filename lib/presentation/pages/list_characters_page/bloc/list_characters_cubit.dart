@@ -10,9 +10,7 @@ class ListCharactersCubit extends Cubit<ListCharactersState> {
     : super(state ?? const ListCharactersState());
 
   Future<void> loadNextPage() async {
-    if (state.eventState == EventState.loading ||
-        state.eventState == EventState.error ||
-        !state.hasMore) {
+    if (state.eventState == EventState.loading || !state.hasMore) {
       return;
     }
     emit(state.copyWith(eventState: EventState.loading));
@@ -37,6 +35,14 @@ class ListCharactersCubit extends Cubit<ListCharactersState> {
     } catch (e) {
       emit(state.copyWith(eventState: EventState.error, message: e.toString()));
     }
+  }
+
+  Future<void> reset() async {
+    emit(state.copyWith(
+      eventState: EventState.initial,
+      message: null,
+    ));
+    await loadNextPage();
   }
 
   Future<void> filterByStatus(StatusOption status) async {

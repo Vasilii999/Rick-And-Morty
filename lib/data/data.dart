@@ -1,4 +1,4 @@
 export 'models/models.dart';
 export 'repositories/repositories.dart';
-export 'datasources/api/api.dart';
-export 'datasources/local/local.dart';
+export 'datasource/api/api.dart';
+export 'datasource/local/local.dart';

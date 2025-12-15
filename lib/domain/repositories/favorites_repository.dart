@@ -6,6 +6,4 @@ abstract interface class FavoritesRepository {
   Future<List<Character>> readFavorite();
 
   Future<void> deleteFavorite(int id);
-
-  Future<bool> existsFavorite(int id);
 }

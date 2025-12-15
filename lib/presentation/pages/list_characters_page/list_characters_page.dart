@@ -2,7 +2,7 @@ import 'package:rick_and_morty/presentation/pages/list_characters_page/bloc/even
 import 'package:rick_and_morty/presentation/pages/list_characters_page/bloc/list_characters_cubit.dart';
 import 'package:rick_and_morty/presentation/pages/list_characters_page/bloc/list_characters_state.dart';
 import 'package:rick_and_morty/utils/presentation_exports.dart';
-import '../widgets/character_card.dart';
+import 'package:rick_and_morty/presentation/pages/widgets/widgets.dart';
 
 class ListCharactersPage extends StatefulWidget {
   const ListCharactersPage({super.key});
@@ -32,22 +32,26 @@ class _ListCharactersPageState extends State<ListCharactersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<ListCharactersCubit, ListCharactersState>(
-        listener: (context, state) {
-          if (state.eventState == EventState.error &&
-              state.character.isNotEmpty) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  state.message ?? 'Во время загрузки произошла ошибка',
-                ),
-              ),
-            );
-          }
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           if (state.eventState == EventState.loading &&
               state.character.isEmpty) {
             return Center(child: CircularProgressIndicator());
+          }
+          if (state.eventState == EventState.error && state.character.isEmpty) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Ошибка загрузки данных, повторите попытку'),
+                TextButton(
+                  onPressed: () {
+                    context.read<ListCharactersCubit>().loadNextPage();
+                  },
+                  child: Text('Повторить'),
+                ),
+              ],
+            );
           }
           if (state.character.isEmpty) {
             return Center(child: Text(state.message.toString()));
@@ -64,24 +68,43 @@ class _ListCharactersPageState extends State<ListCharactersPage> {
                   itemCount: items.length + (state.hasMore ? 1 : 0),
                   itemBuilder: (context, index) {
                     if (index >= items.length) {
-                      return Column(
-                        children: [
-                          Center(child: CircularProgressIndicator()),
-                          spacingV16,
-                        ],
-                      );
+                      if (state.eventState == EventState.error) {
+                        return Column(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Ошибка загрузки данных, повторите попытку',
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    context.read<ListCharactersCubit>().loadNextPage();
+                                  },
+                                  child: Text('Повторить'),
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      }
+                      if (state.eventState == EventState.loading) {
+                        return Column(
+                          children: [
+                            Center(child: CircularProgressIndicator()),
+                            spacingV16,
+                          ],
+                        );
+                      }
+                      return const SizedBox.shrink();
                     }
                     final item = items[index];
                     return Column(
                       children: [
                         CharacterCard(character: item),
                         if (index == items.length - 1)
-                          Column(
-                          children: [
-                            SizedBox(height: 58.h),
-                          ],
-                        ),
-
+                          Column(children: [SizedBox(height: 58.h)]),
                       ],
                     );
                   },
