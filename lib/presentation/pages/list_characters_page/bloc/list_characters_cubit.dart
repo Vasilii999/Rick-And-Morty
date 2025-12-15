@@ -10,7 +10,11 @@ class ListCharactersCubit extends Cubit<ListCharactersState> {
     : super(state ?? const ListCharactersState());
 
   Future<void> loadNextPage() async {
-    if (state.eventState == EventState.loading || !state.hasMore) return;
+    if (state.eventState == EventState.loading ||
+        state.eventState == EventState.error ||
+        !state.hasMore) {
+      return;
+    }
     emit(state.copyWith(eventState: EventState.loading));
 
     try {
@@ -36,9 +40,9 @@ class ListCharactersCubit extends Cubit<ListCharactersState> {
   }
 
   Future<void> filterByStatus(StatusOption status) async {
-    if(status == StatusOption.reset) {
+    if (status == StatusOption.reset) {
       currentStatus = null;
-    } else{
+    } else {
       currentStatus = status.name;
     }
     emit(const ListCharactersState());

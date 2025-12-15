@@ -26,5 +26,10 @@ class CharacterHiveRepositoryImpl implements CharacterRepository {
     }
     return charList;
   }
-
 }
+
+//if (page == 1) {
+//         return charBox.values.toList();
+//       } else {
+//         return [];
+//       }

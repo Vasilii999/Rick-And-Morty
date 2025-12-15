@@ -60,17 +60,31 @@ class _ListCharactersPageState extends State<ListCharactersPage> {
                   controller: _scrollController,
                   padding: listPadding,
                   separatorBuilder: (context, index) => spacingV16,
+                  physics: AlwaysScrollableScrollPhysics(),
+                  itemCount: items.length + (state.hasMore ? 1 : 0),
                   itemBuilder: (context, index) {
-                    if (index == state.character.length) {
-                      return Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Center(child: CircularProgressIndicator()),
+                    if (index >= items.length) {
+                      return Column(
+                        children: [
+                          Center(child: CircularProgressIndicator()),
+                          spacingV16,
+                        ],
                       );
                     }
                     final item = items[index];
-                    return CharacterCard(character: item);
+                    return Column(
+                      children: [
+                        CharacterCard(character: item),
+                        if (index == items.length - 1)
+                          Column(
+                          children: [
+                            SizedBox(height: 58.h),
+                          ],
+                        ),
+
+                      ],
+                    );
                   },
-                  itemCount: items.length + (state.hasMore ? 1 : 0),
                 ),
               ),
             ],
