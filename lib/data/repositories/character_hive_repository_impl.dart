@@ -1,7 +1,4 @@
-import 'package:hive_ce/hive.dart';
-import 'package:rick_and_morty/data/datasource/api/characters_api.dart';
-import 'package:rick_and_morty/data/models/character/character.dart';
-import 'package:rick_and_morty/domain/repositories/character_repository.dart';
+import 'package:rick_and_morty/utils/presentation_exports.dart';
 
 class CharacterHiveRepositoryImpl implements CharacterRepository {
   final Box<Character> charBox;
@@ -18,13 +15,13 @@ class CharacterHiveRepositoryImpl implements CharacterRepository {
     final prefix = _pagePrefix(page, status);
     try {
       final charList = await api.fetchListCharcters(page: page,status: status);
+
       //добавляем в кэш постранично
       for (var i = 0; i < charList.length; i++) {
         await charBox.put('$prefix-$i', charList[i]);
       }
 
       return charList;
-
     } catch (e) {
       //при ошибке (например нет интернета) возвращаем кэшированные данные
       //кидаем ошибку если кэша нет чтобы показать сообщение об ошибке

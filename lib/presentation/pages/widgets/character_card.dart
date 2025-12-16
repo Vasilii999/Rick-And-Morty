@@ -56,7 +56,7 @@ class CharacterCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            character.name,
+                            '${character.name} ${character.id}',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(fontSize: 24),

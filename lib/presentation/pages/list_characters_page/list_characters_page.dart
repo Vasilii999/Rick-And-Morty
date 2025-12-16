@@ -43,7 +43,9 @@ class _ListCharactersPageState extends State<ListCharactersPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Ошибка загрузки данных, повторите попытку'),
+                Center(
+                  child: Text('Ошибка загрузки данных, повторите попытку'),
+                ),
                 TextButton(
                   onPressed: () {
                     context.read<ListCharactersCubit>().loadNextPage();
@@ -57,60 +59,67 @@ class _ListCharactersPageState extends State<ListCharactersPage> {
             return Center(child: Text(state.message.toString()));
           }
           final items = state.character;
-          return Column(
-            children: [
-              Expanded(
-                child: ListView.separated(
-                  controller: _scrollController,
-                  padding: listPadding,
-                  separatorBuilder: (context, index) => spacingV16,
-                  physics: AlwaysScrollableScrollPhysics(),
-                  itemCount: items.length + (state.hasMore ? 1 : 0),
-                  itemBuilder: (context, index) {
-                    if (index >= items.length) {
-                      if (state.eventState == EventState.error) {
-                        return Column(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Ошибка загрузки данных, повторите попытку',
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    context.read<ListCharactersCubit>().loadNextPage();
-                                  },
-                                  child: Text('Повторить'),
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
+          return RefreshIndicator(
+            onRefresh: () => context.read<ListCharactersCubit>().refresh(),
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView.separated(
+                    controller: _scrollController,
+                    padding: listPadding,
+                    separatorBuilder: (context, index) => spacingV16,
+                    physics: AlwaysScrollableScrollPhysics(),
+                    itemCount: items.length + (state.hasMore ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index >= items.length) {
+                        if (state.eventState == EventState.error &&
+                            state.hasMore) {
+                          return Column(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Ошибка загрузки данных, повторите попытку',
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      context
+                                          .read<ListCharactersCubit>()
+                                          .loadNextPage();
+                                    },
+                                    child: Text('Повторить'),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        }
+                        if (state.eventState == EventState.loading) {
+                          return Column(
+                            children: [
+                              Center(child: CircularProgressIndicator()),
+                              spacingV16,
+                            ],
+                          );
+                        }
+                        return const SizedBox.shrink();
                       }
-                      if (state.eventState == EventState.loading) {
-                        return Column(
-                          children: [
-                            Center(child: CircularProgressIndicator()),
-                            spacingV16,
-                          ],
-                        );
-                      }
-                      return const SizedBox.shrink();
-                    }
-                    final item = items[index];
-                    return Column(
-                      children: [
-                        CharacterCard(character: item),
-                        if (index == items.length - 1)
-                          Column(children: [SizedBox(height: 58.h)]),
-                      ],
-                    );
-                  },
+                      final item = items[index];
+                      return Column(
+                        children: [
+                          CharacterCard(character: item),
+                          if (index == items.length - 1 &&
+                              state.eventState != EventState.error)
+                            Column(children: [SizedBox(height: 58.h)]),
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),

@@ -9,7 +9,7 @@ part of 'info.dart';
 Info _$InfoFromJson(Map<String, dynamic> json) => Info(
   count: (json['count'] as num).toInt(),
   pages: (json['pages'] as num).toInt(),
-  next: json['next'] as String,
+  next: json['next'] as String?,
   prev: json['prev'] as String?,
 );
 

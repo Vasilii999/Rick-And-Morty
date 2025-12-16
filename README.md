@@ -66,7 +66,10 @@ cd rick_and_morty
 <img src="assets/screenshots/Screenshot8.png" width="300" />
 Сортировка по статусу в избранном
 <img src="assets/screenshots/Screenshot9.png" width="300" />
-Сортировка по статусу Unknown в избранном
+Обработка ошибок при загрузке
 <img src="assets/screenshots/Screenshot10.png" width="300" />
+<img src="assets/screenshots/Screenshot11.png" width="300" />
+Конец списка
+<img src="assets/screenshots/Screenshot12.png" width="300" />
 
 

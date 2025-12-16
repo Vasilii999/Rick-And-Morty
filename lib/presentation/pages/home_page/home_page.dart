@@ -26,6 +26,11 @@ class _MyHomePageState extends State<HomePage> {
         return Scaffold(
           appBar: AppBar(
             title: Text(_index.value == 0 ? 'Персонажи' : 'Избранные'),
+            //Для очистки кэша при тестировании
+            // leading: IconButton(onPressed: ()  async {
+            //   var box = Hive.box<Character>('characters_cache');
+            //   await box.clear();
+            // }, icon: Icon(Icons.restore_from_trash_sharp)),
             actions: [
               ThemeSwitch(),
               FilterStatus(
@@ -38,7 +43,16 @@ class _MyHomePageState extends State<HomePage> {
           ),
           body: IndexedStack(index: index, children: _pages),
           bottomNavigationBar: BottomNavigationBar(
-            onTap: (index) => _index.value = index,
+            onTap: (index) {
+              //Повтороное нажатие на первую вкладку обновляет список
+              if (_index.value == index) {
+                if (index == 0) {
+                  context.read<ListCharactersCubit>().refresh();
+                }
+              } else {
+                _index.value = index;
+              }
+            },
             unselectedItemColor: Colors.grey,
             selectedItemColor: purple,
             type: BottomNavigationBarType.fixed,
