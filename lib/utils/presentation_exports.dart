@@ -1,6 +1,5 @@
 export 'package:flutter/material.dart';
 export 'alias/alias.dart';
-export 'package:rick_and_morty/utils/utils.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:rick_and_morty/common/common.dart';
 export 'package:rick_and_morty/presentation/pages/pages.dart';
