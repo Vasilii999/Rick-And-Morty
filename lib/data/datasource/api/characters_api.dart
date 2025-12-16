@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:rick_and_morty/data/data.dart';
-import 'package:rick_and_morty/data/models/characters_page/characters_page.dart';
+import 'package:rick_and_morty/utils/presentation_exports.dart';
 
 class CharactersApi {
   final Dio dio;
